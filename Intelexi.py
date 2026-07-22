@@ -10,7 +10,7 @@ from faster_whisper import WhisperModel
 from groq import Groq
 
 # -------------------------------
-client = Groq(api_key=st.secrets.get("GROQ_API_KEY", ""))  # ⭐ keep but safe-get
+client = Groq(api_key=st.secrets.get("GROQ_API_KEY", ""))
 model_name = "llama-3.1-8b-instant"
 print("Loaded client successfully!")
 
@@ -21,7 +21,7 @@ def clean_text(text):
     return " ".join(text.split())
 
 def load_whisper_model():
-    # 🔥 CHANGED: use session_state to ensure single load and re-use
+    # CHANGED: use session_state to ensure single load and re-use
     if "whisper_model" not in st.session_state:
         st.session_state["whisper_model"] = WhisperModel( "tiny",              
             device="cpu",          # no GPU needed
@@ -119,7 +119,7 @@ st.markdown(
         margin-right: auto;
     }
 
-    /* 🔥 CHANGED — Card-style dashboard (Option B) */
+ 
     .card {
         background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
         border-radius: 14px;
@@ -134,7 +134,7 @@ st.markdown(
     .card h2 { margin: 6px 0 4px 0; font-size: 20px; }
     .card p { margin: 0; opacity: 0.8; font-size: 14px; }
 
-    /* 🔥 CHANGED - style all streamlit buttons to look raised/filled */
+
     .stButton>button {
         background: linear-gradient(90deg,#0ea5a9,#7c3aed); /* gradient filled */
         color: white;
@@ -184,7 +184,7 @@ with st.sidebar:
     st.header("⚙️ Settings")
     st.text_input("🤖 Model Name (GROQ Models)", value=model_name, key="sidebar_modelname")
     if st.button("🗑 Clear Chat & Reset"):
-        # 🔥 CHANGED: clear relevant keys but keep whisper model loaded
+        #CHANGED: clear relevant keys but keep whisper model loaded
         keep = {}
         if "whisper_model" in st.session_state:
             keep["whisper_model"] = st.session_state["whisper_model"]
